@@ -1,0 +1,7 @@
+server:
+  port: 8000  #实际运行的端口是8000，因为我们部署到服务器上面的时候是需要nginx代理的。
+  servlet:
+    context-path: /pages  #统一上下文路径叫 /pages
+spring:
+  application:
+    name: szp-gateway
