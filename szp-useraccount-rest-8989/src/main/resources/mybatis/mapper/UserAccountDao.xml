@@ -22,7 +22,7 @@
     from user_account
     where user_id = #{userId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from user_account
     where user_id = #{userId,jdbcType=BIGINT}
   </delete>
@@ -131,4 +131,57 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
+
+  <select id="ajaxList" resultType="cn.lz.szp.pojo.vo.UserAccountVO">
+    select
+    <include refid="Base_Column_List"/>
+    from user_account
+    <where>
+      <if test="userId!=null">
+        and user_id=#{userId}
+      </if>
+      <if test="alipayAccount!=null and alipayAccount!=''">
+        and alipay_account=#{alipayAccount}
+      </if>
+      <if test="alipayAccountName!=null and alipayAccountName!=''">
+        and alipay_account_name=#{alipayAccountName}
+      </if>
+      <if test="weixinAccount!=null and weixinAccount!=''">
+        and weixin_account=#{weixinAccount}
+      </if>
+    </where>
+
+
+  </select>
+  <select id="ajaxListCount" resultType="java.lang.Integer">
+    select
+    count(*)
+    from user_account
+    <where>
+      <if test="userId!=null">
+        and user_id=#{userId}
+      </if>
+      <if test="alipayAccount!=null and alipayAccount!=''">
+        and alipay_account=#{alipayAccount}
+      </if>
+      <if test="alipayAccountName!=null and alipayAccountName!=''">
+        and alipay_account_name=#{alipayAccountName}
+      </if>
+      <if test="weixinAccount!=null and weixinAccount!=''">
+        and weixin_account=#{weixinAccount}
+      </if>
+    </where>
+  </select>
+
+
+
+  <insert id="insertUserAccount" keyColumn="user_id" keyProperty="userId" parameterType="cn.lz.szp.pojo.entity.UserAccount" useGeneratedKeys="true">
+    insert into user_account (user_id, balance, xuebi, commission,
+                              alipay_account, alipay_account_name, weixin_account,
+                              create_time)
+    values (#{userId},#{balance,jdbcType=DECIMAL}, #{xuebi,jdbcType=DECIMAL}, #{commission,jdbcType=DECIMAL},
+            #{alipayAccount,jdbcType=VARCHAR}, #{alipayAccountName,jdbcType=VARCHAR}, #{weixinAccount,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+
 </mapper>

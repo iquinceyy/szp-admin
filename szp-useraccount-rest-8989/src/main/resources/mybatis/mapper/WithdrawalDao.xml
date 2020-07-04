@@ -30,7 +30,7 @@
     from withdrawal
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from withdrawal
     where id = #{id,jdbcType=BIGINT}
   </delete>
@@ -215,4 +215,60 @@
       pay_type = #{payType,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="ajaxList" resultType="cn.lz.szp.pojo.vo.WithdrawalVO">
+    select
+    <include refid="Base_Column_List"/>
+    from withdrawal
+    <where>
+      <if test="userId!=null and userId!=''">
+        and user_id=#{userId}
+      </if>
+
+      <if test="alipayAccount!=null and alipayAccount!=''">
+        and alipay_account=#{alipayAccount}
+      </if>
+
+      <if test="alipayAccountName!=null and alipayAccountName!=''">
+        and alipay_account_name=#{alipayAccountName}
+      </if>
+
+      <if test="weixinAccount!=null and weixinAccount!=''">
+        and weixin_account=#{weixinAccount}
+      </if>
+
+      <if test="weixinReceiver!=null and weixinReceiver!=''">
+        and weixin_receiver=#{weixinReceiver}
+      </if>
+    </where>
+    limit #{start},#{limit}
+
+  </select>
+  <select id="ajaxListCount" resultType="java.lang.Integer">
+    select
+    count(*)
+    from withdrawal
+    <where>
+      <if test="userId!=null and userId!=''">
+        and user_id=#{userId}
+      </if>
+
+      <if test="alipayAccount!=null and alipayAccount!=''">
+        and alipay_account=#{alipayAccount}
+      </if>
+
+      <if test="alipayAccountName!=null and alipayAccountName!=''">
+        and alipay_account_name=#{alipayAccountName}
+      </if>
+
+      <if test="weixinAccount!=null and weixinAccount!=''">
+        and weixin_account=#{weixinAccount}
+      </if>
+
+      <if test="weixinReceiver!=null and weixinReceiver!=''">
+        and weixin_receiver=#{weixinReceiver}
+      </if>
+    </where>
+  </select>
+
 </mapper>

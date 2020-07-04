@@ -1,6 +1,9 @@
 package cn.lz.szp.service;
 
+import cn.lz.szp.pojo.dto.PageDTO;
 import cn.lz.szp.pojo.dto.ResponseDTO;
+import cn.lz.szp.pojo.entity.PayLog;
+import cn.lz.szp.pojo.query.PayLogQuery;
 
 /**
  * quincey
@@ -10,5 +13,7 @@ import cn.lz.szp.pojo.dto.ResponseDTO;
 
 public interface PayLogService {
 
-    ResponseDTO insertPayLog();
+    PageDTO selectPayLogList(PayLogQuery query);
+
+    ResponseDTO insert(PayLog payLog);
 }
