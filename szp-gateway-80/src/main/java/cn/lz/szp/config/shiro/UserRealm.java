@@ -23,7 +23,7 @@ import javax.annotation.Resource;
 @Slf4j
 public class UserRealm extends AuthorizingRealm {
     @Resource
-    UserServiceFeign userServiceFegin;
+    UserServiceFeign userServiceFeign;
     @Resource
     RedisTemplate<String, Object> redisTemplate;
     public static final String USER_REALM = "userRealm";

@@ -18,13 +18,9 @@ public class DataSourceConfig {
     @Bean
     DataSource dataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
-//        druidDataSource.setUsername("root");
-//        druidDataSource.setPassword("root");
-//        druidDataSource.setUrl("jdbc:mysql://120.25.223.121:3306/szp_db_test?serverTimezone=Asia/Shanghai");
-
         druidDataSource.setUsername("root");
-        druidDataSource.setPassword("123456");
-        druidDataSource.setUrl("jdbc:mysql://127.0.0.1:3306/szp_db_test?serverTimezone=Asia/Shanghai");
+        druidDataSource.setPassword("root");
+        druidDataSource.setUrl("jdbc:mysql://120.25.223.121:3306/szp_db_test?serverTimezone=Asia/Shanghai");
         return druidDataSource;
     }
     // 再这里配置mybatis：
