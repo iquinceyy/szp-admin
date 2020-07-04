@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lz.szp.dao.UserAccountDao">
+  <resultMap id="BaseResultMap" type="cn.lz.szp.pojo.entity.UserAccount">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="balance" jdbcType="DECIMAL" property="balance" />
+    <result column="xuebi" jdbcType="DECIMAL" property="xuebi" />
+    <result column="commission" jdbcType="DECIMAL" property="commission" />
+    <result column="alipay_account" jdbcType="VARCHAR" property="alipayAccount" />
+    <result column="alipay_account_name" jdbcType="VARCHAR" property="alipayAccountName" />
+    <result column="weixin_account" jdbcType="VARCHAR" property="weixinAccount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, balance, xuebi, commission, alipay_account, alipay_account_name, weixin_account, 
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_account
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_account
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="cn.lz.szp.pojo.entity.UserAccount" useGeneratedKeys="true">
+    insert into user_account (balance, xuebi, commission, 
+      alipay_account, alipay_account_name, weixin_account, 
+      create_time, update_time)
+    values (#{balance,jdbcType=DECIMAL}, #{xuebi,jdbcType=DECIMAL}, #{commission,jdbcType=DECIMAL}, 
+      #{alipayAccount,jdbcType=VARCHAR}, #{alipayAccountName,jdbcType=VARCHAR}, #{weixinAccount,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="cn.lz.szp.pojo.entity.UserAccount" useGeneratedKeys="true">
+    insert into user_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="balance != null">
+        balance,
+      </if>
+      <if test="xuebi != null">
+        xuebi,
+      </if>
+      <if test="commission != null">
+        commission,
+      </if>
+      <if test="alipayAccount != null">
+        alipay_account,
+      </if>
+      <if test="alipayAccountName != null">
+        alipay_account_name,
+      </if>
+      <if test="weixinAccount != null">
+        weixin_account,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="balance != null">
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="xuebi != null">
+        #{xuebi,jdbcType=DECIMAL},
+      </if>
+      <if test="commission != null">
+        #{commission,jdbcType=DECIMAL},
+      </if>
+      <if test="alipayAccount != null">
+        #{alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAccountName != null">
+        #{alipayAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinAccount != null">
+        #{weixinAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.lz.szp.pojo.entity.UserAccount">
+    update user_account
+    <set>
+      <if test="balance != null">
+        balance = #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="xuebi != null">
+        xuebi = #{xuebi,jdbcType=DECIMAL},
+      </if>
+      <if test="commission != null">
+        commission = #{commission,jdbcType=DECIMAL},
+      </if>
+      <if test="alipayAccount != null">
+        alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAccountName != null">
+        alipay_account_name = #{alipayAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinAccount != null">
+        weixin_account = #{weixinAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.lz.szp.pojo.entity.UserAccount">
+    update user_account
+    set balance = #{balance,jdbcType=DECIMAL},
+      xuebi = #{xuebi,jdbcType=DECIMAL},
+      commission = #{commission,jdbcType=DECIMAL},
+      alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+      alipay_account_name = #{alipayAccountName,jdbcType=VARCHAR},
+      weixin_account = #{weixinAccount,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+
+  <select id="ajaxList" resultType="cn.lz.szp.pojo.vo.UserAccountVO">
+    select
+    <include refid="Base_Column_List"/>
+    from user_account
+    <where>
+      <if test="userId!=null">
+        and user_id=#{userId}
+      </if>
+      <if test="alipayAccount!=null and alipayAccount!=''">
+        and alipay_account=#{alipayAccount}
+      </if>
+      <if test="alipayAccountName!=null and alipayAccountName!=''">
+        and alipay_account_name=#{alipayAccountName}
+      </if>
+      <if test="weixinAccount!=null and weixinAccount!=''">
+        and weixin_account=#{weixinAccount}
+      </if>
+    </where>
+
+
+  </select>
+  <select id="ajaxListCount" resultType="java.lang.Integer">
+    select
+    count(*)
+    from user_account
+    <where>
+      <if test="userId!=null">
+        and user_id=#{userId}
+      </if>
+      <if test="alipayAccount!=null and alipayAccount!=''">
+        and alipay_account=#{alipayAccount}
+      </if>
+      <if test="alipayAccountName!=null and alipayAccountName!=''">
+        and alipay_account_name=#{alipayAccountName}
+      </if>
+      <if test="weixinAccount!=null and weixinAccount!=''">
+        and weixin_account=#{weixinAccount}
+      </if>
+    </where>
+  </select>
+
+
+
+  <insert id="insertUserAccount" keyColumn="user_id" keyProperty="userId" parameterType="cn.lz.szp.pojo.entity.UserAccount" useGeneratedKeys="true">
+    insert into user_account (user_id, balance, xuebi, commission,
+                              alipay_account, alipay_account_name, weixin_account,
+                              create_time)
+    values (#{userId},#{balance,jdbcType=DECIMAL}, #{xuebi,jdbcType=DECIMAL}, #{commission,jdbcType=DECIMAL},
+            #{alipayAccount,jdbcType=VARCHAR}, #{alipayAccountName,jdbcType=VARCHAR}, #{weixinAccount,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+
+</mapper>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lz.szp.dao.WithdrawalDao">
+  <resultMap id="BaseResultMap" type="cn.lz.szp.pojo.entity.Withdrawal">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="alipay_account" jdbcType="VARCHAR" property="alipayAccount" />
+    <result column="alipay_account_name" jdbcType="VARCHAR" property="alipayAccountName" />
+    <result column="payment_time" jdbcType="TIMESTAMP" property="paymentTime" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="before" jdbcType="DECIMAL" property="before" />
+    <result column="after" jdbcType="DECIMAL" property="after" />
+    <result column="account_flow_id" jdbcType="BIGINT" property="accountFlowId" />
+    <result column="voucher" jdbcType="VARCHAR" property="voucher" />
+    <result column="weixin_account" jdbcType="VARCHAR" property="weixinAccount" />
+    <result column="weixin_receiver" jdbcType="VARCHAR" property="weixinReceiver" />
+    <result column="pay_type" jdbcType="VARCHAR" property="payType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, money, create_time, `status`, alipay_account, alipay_account_name, payment_time, 
+    note, `before`, `after`, account_flow_id, voucher, weixin_account, weixin_receiver, 
+    pay_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from withdrawal
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from withdrawal
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.lz.szp.pojo.entity.Withdrawal" useGeneratedKeys="true">
+    insert into withdrawal (user_id, money, create_time, 
+      `status`, alipay_account, alipay_account_name, 
+      payment_time, note, `before`, 
+      `after`, account_flow_id, voucher, 
+      weixin_account, weixin_receiver, pay_type
+      )
+    values (#{userId,jdbcType=BIGINT}, #{money,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{alipayAccount,jdbcType=VARCHAR}, #{alipayAccountName,jdbcType=VARCHAR}, 
+      #{paymentTime,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR}, #{before,jdbcType=DECIMAL}, 
+      #{after,jdbcType=DECIMAL}, #{accountFlowId,jdbcType=BIGINT}, #{voucher,jdbcType=VARCHAR}, 
+      #{weixinAccount,jdbcType=VARCHAR}, #{weixinReceiver,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.lz.szp.pojo.entity.Withdrawal" useGeneratedKeys="true">
+    insert into withdrawal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="alipayAccount != null">
+        alipay_account,
+      </if>
+      <if test="alipayAccountName != null">
+        alipay_account_name,
+      </if>
+      <if test="paymentTime != null">
+        payment_time,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="before != null">
+        `before`,
+      </if>
+      <if test="after != null">
+        `after`,
+      </if>
+      <if test="accountFlowId != null">
+        account_flow_id,
+      </if>
+      <if test="voucher != null">
+        voucher,
+      </if>
+      <if test="weixinAccount != null">
+        weixin_account,
+      </if>
+      <if test="weixinReceiver != null">
+        weixin_receiver,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAccount != null">
+        #{alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAccountName != null">
+        #{alipayAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentTime != null">
+        #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="before != null">
+        #{before,jdbcType=DECIMAL},
+      </if>
+      <if test="after != null">
+        #{after,jdbcType=DECIMAL},
+      </if>
+      <if test="accountFlowId != null">
+        #{accountFlowId,jdbcType=BIGINT},
+      </if>
+      <if test="voucher != null">
+        #{voucher,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinAccount != null">
+        #{weixinAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinReceiver != null">
+        #{weixinReceiver,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.lz.szp.pojo.entity.Withdrawal">
+    update withdrawal
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAccount != null">
+        alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAccountName != null">
+        alipay_account_name = #{alipayAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentTime != null">
+        payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="before != null">
+        `before` = #{before,jdbcType=DECIMAL},
+      </if>
+      <if test="after != null">
+        `after` = #{after,jdbcType=DECIMAL},
+      </if>
+      <if test="accountFlowId != null">
+        account_flow_id = #{accountFlowId,jdbcType=BIGINT},
+      </if>
+      <if test="voucher != null">
+        voucher = #{voucher,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinAccount != null">
+        weixin_account = #{weixinAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinReceiver != null">
+        weixin_receiver = #{weixinReceiver,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.lz.szp.pojo.entity.Withdrawal">
+    update withdrawal
+    set user_id = #{userId,jdbcType=BIGINT},
+      money = #{money,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      `status` = #{status,jdbcType=VARCHAR},
+      alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+      alipay_account_name = #{alipayAccountName,jdbcType=VARCHAR},
+      payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      note = #{note,jdbcType=VARCHAR},
+      `before` = #{before,jdbcType=DECIMAL},
+      `after` = #{after,jdbcType=DECIMAL},
+      account_flow_id = #{accountFlowId,jdbcType=BIGINT},
+      voucher = #{voucher,jdbcType=VARCHAR},
+      weixin_account = #{weixinAccount,jdbcType=VARCHAR},
+      weixin_receiver = #{weixinReceiver,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="ajaxList" resultType="cn.lz.szp.pojo.vo.WithdrawalVO">
+    select
+    <include refid="Base_Column_List"/>
+    from withdrawal
+    <where>
+      <if test="userId!=null and userId!=''">
+        and user_id=#{userId}
+      </if>
+
+      <if test="alipayAccount!=null and alipayAccount!=''">
+        and alipay_account=#{alipayAccount}
+      </if>
+
+      <if test="alipayAccountName!=null and alipayAccountName!=''">
+        and alipay_account_name=#{alipayAccountName}
+      </if>
+
+      <if test="weixinAccount!=null and weixinAccount!=''">
+        and weixin_account=#{weixinAccount}
+      </if>
+
+      <if test="weixinReceiver!=null and weixinReceiver!=''">
+        and weixin_receiver=#{weixinReceiver}
+      </if>
+    </where>
+    limit #{start},#{limit}
+
+  </select>
+  <select id="ajaxListCount" resultType="java.lang.Integer">
+    select
+    count(*)
+    from withdrawal
+    <where>
+      <if test="userId!=null and userId!=''">
+        and user_id=#{userId}
+      </if>
+
+      <if test="alipayAccount!=null and alipayAccount!=''">
+        and alipay_account=#{alipayAccount}
+      </if>
+
+      <if test="alipayAccountName!=null and alipayAccountName!=''">
+        and alipay_account_name=#{alipayAccountName}
+      </if>
+
+      <if test="weixinAccount!=null and weixinAccount!=''">
+        and weixin_account=#{weixinAccount}
+      </if>
+
+      <if test="weixinReceiver!=null and weixinReceiver!=''">
+        and weixin_receiver=#{weixinReceiver}
+      </if>
+    </where>
+  </select>
+
+</mapper>

@@ -1,0 +1,10 @@
+server:
+  port: 8989  #实际运行的端口是8001，因为我们部署到服务器上面的时候是需要nginx代理的。
+spring:
+  application:
+    name: useraccount-rest  #微服务的名称
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true  #  下划线转换程驼峰
+#      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #  日志也可以这么配置
+#  mapper-locations: classpath*:mybatis/mapper/**/*.xml  # mapper.xml文件的路径配置

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lz.szp.dao.PayLogDao">
+  <resultMap id="BaseResultMap" type="cn.lz.szp.pojo.entity.PayLog">
+    <id column="pay_log_id" jdbcType="BIGINT" property="payLogId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="user_img" jdbcType="VARCHAR" property="userImg" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pay_log_id, content, user_id, order_id, pay_time, money, nick_name, user_img
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pay_log
+    where pay_log_id = #{payLogId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from pay_log
+    where pay_log_id = #{payLogId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="pay_log_id" keyProperty="payLogId" parameterType="cn.lz.szp.pojo.entity.PayLog" useGeneratedKeys="true">
+    insert into pay_log (content, user_id, order_id, 
+      pay_time, money, nick_name, 
+      user_img)
+    values (#{content,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{money,jdbcType=DECIMAL}, #{nickName,jdbcType=VARCHAR}, 
+      #{userImg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="pay_log_id" keyProperty="payLogId" parameterType="cn.lz.szp.pojo.entity.PayLog" useGeneratedKeys="true">
+    insert into pay_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="content != null">
+        content,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="userImg != null">
+        user_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="userImg != null">
+        #{userImg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.lz.szp.pojo.entity.PayLog">
+    update pay_log
+    <set>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="userImg != null">
+        user_img = #{userImg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pay_log_id = #{payLogId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.lz.szp.pojo.entity.PayLog">
+    update pay_log
+    set content = #{content,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      order_id = #{orderId,jdbcType=BIGINT},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      money = #{money,jdbcType=DECIMAL},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      user_img = #{userImg,jdbcType=VARCHAR}
+    where pay_log_id = #{payLogId,jdbcType=BIGINT}
+  </update>
+
+  <select id="ajaxList" resultType="cn.lz.szp.pojo.vo.PayLogVO">
+    select
+    <include refid="Base_Column_List"/>
+    from pay_log
+    <where>
+      <if test="userId !=null">
+        and user_id=#{userId}
+      </if>
+      <if test="orderId !=null">
+        and order_id=#{orderId}
+      </if>
+      <if test="nickName !=null and nickName !=''">
+        and nick_name like CONCAT(#{shopName},'%')
+      </if>
+    </where>
+    limit #{start},#{limit}
+  </select>
+  <select id="ajaxListCount" resultType="java.lang.Integer">
+    select
+    count(*)
+    from pay_log
+    <where>
+      <if test="userId!=null">
+        and user_id=#{userId}
+      </if>
+      <if test="orderId!=null">
+        and order_id=#{orderId}
+      </if>
+      <if test="nickName!=null and nickName!=''">
+        and nick_name=#{nickName}
+      </if>
+    </where>
+  </select>
+
+</mapper>
