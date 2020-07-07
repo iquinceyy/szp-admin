@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lz.szp.dao.AppConfigDao">
+  <resultMap id="BaseResultMap" type="cn.lz.szp.pojo.entity.AppConfig">
+    <id column="config_id" jdbcType="INTEGER" property="configId" />
+    <result column="key" jdbcType="VARCHAR" property="key" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="is_json" jdbcType="BOOLEAN" property="isJson" />
+    <result column="class_name" jdbcType="VARCHAR" property="className" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    config_id, `key`, `value`, note, is_json, class_name, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from app_config
+    where config_id = #{configId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from app_config
+    where config_id = #{configId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="config_id" keyProperty="configId" parameterType="cn.lz.szp.pojo.entity.AppConfig" useGeneratedKeys="true">
+    insert into app_config (`key`, `value`, note, 
+      is_json, class_name, create_time, 
+      update_time)
+    values (#{key,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{isJson,jdbcType=BOOLEAN}, #{className,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="config_id" keyProperty="configId" parameterType="cn.lz.szp.pojo.entity.AppConfig" useGeneratedKeys="true">
+    insert into app_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="key != null">
+        `key`,
+      </if>
+      <if test="value != null">
+        `value`,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="isJson != null">
+        is_json,
+      </if>
+      <if test="className != null">
+        class_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="key != null">
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="isJson != null">
+        #{isJson,jdbcType=BOOLEAN},
+      </if>
+      <if test="className != null">
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.lz.szp.pojo.entity.AppConfig">
+    update app_config
+    <set>
+      <if test="key != null">
+        `key` = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        `value` = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="isJson != null">
+        is_json = #{isJson,jdbcType=BOOLEAN},
+      </if>
+      <if test="className != null">
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where config_id = #{configId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.lz.szp.pojo.entity.AppConfig">
+    update app_config
+    set `key` = #{key,jdbcType=VARCHAR},
+      `value` = #{value,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      is_json = #{isJson,jdbcType=BOOLEAN},
+      class_name = #{className,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where config_id = #{configId,jdbcType=INTEGER}
+  </update>
+  <select id="ajaxCourseList" resultType="cn.lz.szp.pojo.vo.AppConfigVO">
+    select <include refid="Base_Column_List"/> from app_config
+    <where>
+
+    </where>
+    limit #{start},#{limit}
+  </select>
+  <select id="ajaxCourseListCount" resultType="java.lang.Integer">
+    select count(*) from app_config
+    <where>
+
+    </where>
+  </select>
+
+</mapper>

@@ -9,6 +9,7 @@
         <module>szp-gateway-80</module>
         <module>szp-security</module>
         <module>szp-useraccount-rest-8989</module>
+        <module>szp-course-rest-9090</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

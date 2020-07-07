@@ -17,10 +17,10 @@ public class PageDTO {
 
     private String msg = "";
 
-    private Integer count = 0;
+    private Integer count = 0;//总数
 
-    private Object data;
-    private Object moreData;
+    private Object data;//当前页数据
+    private Object moreData;//
 
     public static PageDTO setPageData(Integer count, Object data) {
         return new PageDTO(0, "成功", count, data,null);

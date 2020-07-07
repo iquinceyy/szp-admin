@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lz.szp.dao.TeacherDao">
+  <resultMap id="BaseResultMap" type="cn.lz.szp.pojo.entity.Teacher">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="career" jdbcType="VARCHAR" property="career" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="user_img" jdbcType="VARCHAR" property="userImg" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="student_count" jdbcType="INTEGER" property="studentCount" />
+    <result column="fans_count" jdbcType="INTEGER" property="fansCount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, `name`, intro, career, `level`, user_img, sort, is_deleted, create_time, 
+    update_time, student_count, fans_count
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from teacher
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from teacher
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="cn.lz.szp.pojo.entity.Teacher" useGeneratedKeys="true">
+    insert into teacher (`name`, intro, career, 
+      `level`, user_img, sort, 
+      is_deleted, create_time, update_time, 
+      student_count, fans_count)
+    values (#{name,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, #{career,jdbcType=VARCHAR}, 
+      #{level,jdbcType=INTEGER}, #{userImg,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{studentCount,jdbcType=INTEGER}, #{fansCount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="cn.lz.szp.pojo.entity.Teacher" useGeneratedKeys="true">
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="intro != null">
+        intro,
+      </if>
+      <if test="career != null">
+        career,
+      </if>
+      <if test="level != null">
+        `level`,
+      </if>
+      <if test="userImg != null">
+        user_img,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="studentCount != null">
+        student_count,
+      </if>
+      <if test="fansCount != null">
+        fans_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="career != null">
+        #{career,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="userImg != null">
+        #{userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="studentCount != null">
+        #{studentCount,jdbcType=INTEGER},
+      </if>
+      <if test="fansCount != null">
+        #{fansCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.lz.szp.pojo.entity.Teacher">
+    update teacher
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="career != null">
+        career = #{career,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        `level` = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="userImg != null">
+        user_img = #{userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="studentCount != null">
+        student_count = #{studentCount,jdbcType=INTEGER},
+      </if>
+      <if test="fansCount != null">
+        fans_count = #{fansCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.lz.szp.pojo.entity.Teacher">
+    update teacher
+    set `name` = #{name,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      career = #{career,jdbcType=VARCHAR},
+      `level` = #{level,jdbcType=INTEGER},
+      user_img = #{userImg,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      student_count = #{studentCount,jdbcType=INTEGER},
+      fans_count = #{fansCount,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <select id="ajaxTeacherList" resultType="cn.lz.szp.pojo.vo.TeacherVO">
+    select <include refid="Base_Column_List"/> from teacher
+    <where>
+
+
+    </where>
+    limit #{start},#{limit}
+  </select>
+  <select id="ajaxTeacherListCount" resultType="java.lang.Integer">
+    select count(*) from teacher
+    <where>
+
+
+    </where>
+  </select>
+
+</mapper>
