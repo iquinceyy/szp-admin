@@ -22,6 +22,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="szp-datasource" />
     <orderEntry type="module" module-name="szp-common" />
+    <orderEntry type="module" module-name="szp-datasource" />
+    <orderEntry type="module" module-name="szp-common" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.12" level="project" />
     <orderEntry type="library" name="Maven: cn.hutool:hutool-core:5.3.5" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.62" level="project" />
