@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>szp-useracount-rest-8989</artifactId>
+    <artifactId>szp-useraccount-rest-8989</artifactId>
 
     <dependencies>
         <dependency>
