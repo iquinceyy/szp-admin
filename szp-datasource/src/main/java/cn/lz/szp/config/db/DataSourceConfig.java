@@ -1,6 +1,7 @@
 package cn.lz.szp.config.db;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import org.apache.ibatis.session.Configuration;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +32,11 @@ public class DataSourceConfig {
         sqlSessionFactoryBean.setDataSource(dataSource);
         try {
             sqlSessionFactoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
+            Configuration configuration = sqlSessionFactoryBean.getObject().getConfiguration();
+            configuration.setMapUnderscoreToCamelCase(true);
+            sqlSessionFactoryBean.setConfiguration(configuration);
+
+
             PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
             Resource[] resources = resolver.getResources("classpath*:mybatis/mapper/**/*.xml");
             sqlSessionFactoryBean.setMapperLocations(resources);

@@ -139,7 +139,7 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new HashMap<>();
         filterChainDefinitionMap.put("/logout", "logout");
 //        filterChainDefinitionMap.put("/login", "user");    // 定义内置登录处理,表单需要加method=post
-        filterChainDefinitionMap.put("/back/**", "checkLogin");//pages/back/**这样的路径需要登陆检测
+//        filterChainDefinitionMap.put("/back/**", "checkLogin");//pages/back/**这样的路径需要登陆检测
         filterChainDefinitionMap.put("/*", "anon");// 所有不用检测
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
