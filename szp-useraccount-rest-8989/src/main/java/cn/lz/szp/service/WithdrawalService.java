@@ -20,7 +20,7 @@ public interface WithdrawalService {
     ResponseDTO insert(Withdrawal withdrawal);
 
     //查询日志
-   PageDTO selectWithdrawalList(WithdrawalQuery query);
+    List<WithdrawalVO> selectWithdrawalList(WithdrawalQuery query);
 
 
 

@@ -8,6 +8,6 @@ import org.springframework.cloud.openfeign.FeignClient;
  * Date 2020/7/3 18:26
  */
 
-@FeignClient(value = "", path = "", configuration = FeignClientConfig.class)
+@FeignClient(value = "useraccount-rest", path = "", configuration = FeignClientConfig.class)
 public interface UserAccountServiceFeign {
 }

@@ -49,8 +49,8 @@ public class UserAccountRest {
     }
 
     //删除
-    @RequestMapping("/delete")
-    ResponseDTO deleteUserAccountByUserId(Long userId){
+    @RequestMapping("/delete/{userId}")
+    ResponseDTO deleteUserAccountByUserId(@PathVariable Long userId){
         return userAccountService.delete(userId);
     }
 

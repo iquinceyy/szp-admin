@@ -37,7 +37,7 @@ public class WithdrawalRest {
 
     //查询
     @RequestMapping("/ajaxList")
-    PageDTO select(WithdrawalQuery query){
+    List<WithdrawalVO> select(WithdrawalQuery query){
         return withdrawalService.selectWithdrawalList(query);
     }
 

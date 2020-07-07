@@ -33,10 +33,11 @@ public class WithdrawalServiceImpl implements WithdrawalService {
     }
 
     @Override
-    public PageDTO selectWithdrawalList(WithdrawalQuery query) {
+    public List<WithdrawalVO> selectWithdrawalList(WithdrawalQuery query) {
         List<WithdrawalVO> withdrawalVOS = withdrawalDao.ajaxList(query);
-        Integer count = withdrawalDao.ajaxListCount(query);
-        return PageDTO.setPageData(count,withdrawalVOS);
+//        Map<Long, List<WithdrawalVO>> collect = withdrawalVOS.stream().collect(Collectors.groupingBy(WithdrawalVO::getUserId));
+//        Integer count = withdrawalDao.ajaxListCount(query);
+        return withdrawalVOS;
     }
 
 
